@@ -1,0 +1,10 @@
+nav {
+    background: #00a1e7;
+    padding: 3%;
+    font-size: 1.5em;
+    text-align: center;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    color: white;
+}

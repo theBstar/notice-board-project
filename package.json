@@ -1,0 +1,21 @@
+{
+  "name": "cms_hostel",
+  "version": "1.0.0",
+  "description": "simple Mern app for hostel admin, where he can add the hostels",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "install-all": "npm install && cd client && npm install",
+    "server": "node index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bikram",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.4"
+  }
+}
