@@ -8,3 +8,8 @@ nav {
     top: 0;
     color: white;
 }
+
+a, a:active, a:visited {
+    text-decoration: none;
+    color: black
+}

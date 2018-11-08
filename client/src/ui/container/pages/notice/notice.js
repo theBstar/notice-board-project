@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './noticePage.css' 
+import './notice.css' 
 
 export default class NoticePage extends Component {
     render() {

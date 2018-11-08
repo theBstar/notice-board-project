@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
-import './admin.css' 
+import { Redirect } from 'react-router-dom';
 import CardContainer from '../../../component/cardContainer/cardContainer';
 import AddButton from '../../../component/button/addButton/addButton';
-
+import './admin.css';
 
 export default class MainContent extends Component {
+    constructor() {
+        super();
+        this.state = {
+            authKey: localStorage.getItem('86cd79943901') || null
+        }
+    }
+
     render() {
         return (
-            <div className="main-container">
-                <CardContainer notices = {this.props.notices}/>
-                <AddButton />
-            </div>
+            (this.state.authKey) ? (
+                <div className="main-container">
+                    <CardContainer notices = {this.props.notices}/>
+                    <AddButton />
+                </div>
+            ) : (
+                <Redirect to='/admin/login' />
+            )
         );
     }
 }
