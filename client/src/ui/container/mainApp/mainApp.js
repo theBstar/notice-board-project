@@ -30,7 +30,7 @@ export default class MainApp extends Component {
                 {
                     id: 1234,
                     title: 'Last date of assignment submission extended',
-                    details: 'IGNOU has extended the last date for submission of assignment for programmes MCA and  BCA',
+                    details: 'IGNOU has extended the last date for submission of assignment for programmes MCA and  BCA IGNOU has extended the last date for submission of assignment for programmes MCA and  BCA IGNOU has extended the last date for submission of assignment for programmes MCA and  BCA',
                     date: new Date()
 
                 },

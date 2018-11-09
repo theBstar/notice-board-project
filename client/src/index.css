@@ -11,3 +11,8 @@ body {
     background: #fff;
     font-family: 'Open Sans', sans-serif;
 }
+
+a, a:active, a:visited {
+    text-decoration: none;
+    color: black
+}
