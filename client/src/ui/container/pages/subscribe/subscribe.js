@@ -12,7 +12,6 @@ export default class NoticePage extends Component {
     }
     onSumbit(e) {
         e.preventDefault();
-        console.log('Page submitted with data', JSON.stringify(e.target.name.value))
         this.setState({
             isSubmitted: true
         });

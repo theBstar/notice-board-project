@@ -53,6 +53,11 @@
     border: none
 }
 
+.modal-content textarea {
+    height: 80px;
+    padding-top: 10px;
+}
+
 #modal-btn {
     background: black;
     color: white;

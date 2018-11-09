@@ -11,7 +11,6 @@ export default class LoginPage extends Component {
     }
     onSumbit(e) {
         e.preventDefault();
-        console.log('Page submitted with data', JSON.stringify(e.target.name.value))
         localStorage.setItem('86cd79943901', 'dummy')
         this.setState({
             isLoggedIn: true

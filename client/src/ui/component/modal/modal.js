@@ -6,7 +6,11 @@ export default class Modal extends Component {
 
     render() {
         const secondInput = ( this.props.inputDetails.type[1] === 'textArea' ) ? (
-            ''
+            <textarea 
+                className='modal-input' 
+                name='textArea' 
+                placeholder={this.props.inputDetails.placeholder[1]}>
+            </textarea>
         ) : (
             <input 
                 type={ this.props.inputDetails.type[1] } 
@@ -18,7 +22,6 @@ export default class Modal extends Component {
             />
         )
         
-        console.log("................", this.props.redirectTo)
         return(
             ( !this.props.canClose ) ? (
                 <div className="modal">

@@ -3,16 +3,17 @@ import { Route, Switch } from 'react-router-dom';
 import {Navbar} from '../../component/navbar/navbar';
 import HomePage from '../pages/home/home';
 import AdminPage from '../pages/admin/admin';
-import NoticePage from '../pages/notice/notice';
+import NoticeDetailsPage from '../pages/notice/notice';
 import SubscribePage from '../pages/subscribe/subscribe';
 import LoginPage from '../pages/login/login';
-import AddNotice from '../pages/addNotice/addNotice';
+import AddNoticePage from '../pages/addNotice/addNotice';
 
 export default class MainApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            notices: null
+            notices: [],
+            isAdded: false
         };
         this.addNotice = this.addNotice.bind(this);
         this.renderHome = this.renderHome.bind(this);
@@ -30,30 +31,40 @@ export default class MainApp extends Component {
                     id: 1234,
                     title: 'Last date of assignment submission extended',
                     details: 'IGNOU has extended the last date for submission of assignment for programmes MCA and  BCA',
+                    date: new Date()
 
                 },
                 {
                     id: 1235,
                     title: 'Use Digital Material',
-                    details: 'Opt for digital material and get 15% discout. Download econtent app for digital materials'
-
+                    details: 'Opt for digital material and get 15% discout. Download econtent app for digital materials',
+                    date: new Date()
                 }
             ];
-            this.setState({
-                notices
-            });
+            this.setState((prevState, props)=> ({
+                notices: [...prevState.notices, ...notices]
+            }));
         }
-        console.log("hostel updated", this.state.notices)
+        console.log("Notice updated", this.state.notices)
     }
 
     addNotice(e) {
         e.preventDefault();
         const newNotice = {
-            name: e.target.name.value
+            id: Math.floor(Math.random() * 9999 ),
+            title: e.target.text.value,
+            details: e.target.textArea.value,
+            date: new Date()
         }
         this.setState((prevState)=>({
-            notices: [...prevState.notices]
+            notices: [...prevState.notices, newNotice],
+            isAdded: true
         }));
+        setTimeout(()=> {
+            this.setState({
+                isAdded: false
+            })
+        }, 200)
     }
 
     renderHome() {
@@ -67,8 +78,8 @@ export default class MainApp extends Component {
     renderAdmin() {
         return (
             <AdminPage
-                notices = {this.state.notices}
-                addNotice = {this.addNotice}
+                notices = { this.state.notices }
+                addNotice = { this.addNotice }
             />
         )
     }
@@ -83,7 +94,7 @@ export default class MainApp extends Component {
             })[0]
         }
         return(
-            <NoticePage notice = {notice}/>
+            <NoticeDetailsPage notice = {notice}/>
         )
     }
 
@@ -100,8 +111,14 @@ export default class MainApp extends Component {
     }
 
     renderAddNotice() {
+        // this.setState({
+        //     isAdded: false
+        // })
         return (
-            <AddNotice onFormSubmit={ this.addNotice } />
+            <AddNoticePage
+                onFormSubmit={ this.addNotice }
+                isAdded = { this.state.isAdded } 
+            />
         )
     }
   
