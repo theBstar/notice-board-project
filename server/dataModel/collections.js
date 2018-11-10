@@ -15,7 +15,9 @@ const subscriberSchema = new Schema({
 
 const adminAccountSchema = new Schema({
     email: String,
-    password: String
+    password: String,
+    tokenName: String,
+    token: String
 });
 
 

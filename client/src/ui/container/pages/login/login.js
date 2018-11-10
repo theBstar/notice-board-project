@@ -11,22 +11,25 @@ export default class LoginPage extends Component {
     }
     onSumbit(e) {
         e.preventDefault();
-        localStorage.setItem('86cd79943901', 'dummy')
-        this.setState({
-            isLoggedIn: true
-        });
-        return;
         const requestPayload = {
             method: 'post',
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
               },
-              body: `name=${e.target.name.value}&email=${e.target.email.value}`
+              body: `password=${e.target.password.value}&email=${e.target.email.value}`
         }
         fetch(
             '/api/admin/login',
             requestPayload
-        )
+        ).then(res=>res.json())
+         .then((data)=> {
+             if (data.success) {
+                localStorage.setItem('86cd79943901', data.token)
+                this.setState({
+                isLoggedIn: true
+                })
+             }
+         })
     }
     render() {
         const propsToPass = {

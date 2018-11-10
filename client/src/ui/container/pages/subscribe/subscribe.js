@@ -12,21 +12,21 @@ export default class NoticePage extends Component {
     }
     onSumbit(e) {
         e.preventDefault();
-        this.setState({
-            isSubmitted: true
-        });
-        return;
         const requestPayload = {
             method: 'post',
             headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
               },
-              body: `name=${e.target.name.value}&email=${e.target.email.value}`
+              body: `name=${e.target.text.value}&email=${e.target.email.value}`
         }
         fetch(
             '/api/subscribe',
             requestPayload
-        )
+        );
+        this.setState({
+            isSubmitted: true
+        });
+        return;
     }
     render() {
         const propsToPass = {

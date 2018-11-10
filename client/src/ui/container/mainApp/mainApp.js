@@ -24,42 +24,50 @@ export default class MainApp extends Component {
         this.renderAddNotice = this.renderAddNotice.bind(this);
     }
 
-    componentDidMount() {
-        if(!this.state.notice) {
-            const notices = [
-                {
-                    id: 1234,
-                    title: 'Last date of assignment submission extended',
-                    details: 'IGNOU has extended the last date for submission of assignment for programmes MCA and  BCA IGNOU has extended the last date for submission of assignment for programmes MCA and  BCA IGNOU has extended the last date for submission of assignment for programmes MCA and  BCA',
-                    date: new Date()
-
-                },
-                {
-                    id: 1235,
-                    title: 'Use Digital Material',
-                    details: 'Opt for digital material and get 15% discout. Download econtent app for digital materials',
-                    date: new Date()
-                }
-            ];
-            this.setState((prevState, props)=> ({
-                notices: [...prevState.notices, ...notices]
-            }));
-        }
-        console.log("Notice updated", this.state.notices)
+    componentWillMount() {
+        fetch('/api/notice')
+            .then((res)=>res.json())
+            .then((recienvedNotices)=> {
+                this.setState({
+                    notices: recienvedNotices
+                })
+            });
     }
 
     addNotice(e) {
         e.preventDefault();
         const newNotice = {
-            id: Math.floor(Math.random() * 9999 ),
             title: e.target.text.value,
             details: e.target.textArea.value,
             date: new Date()
         }
-        this.setState((prevState)=>({
-            notices: [...prevState.notices, newNotice],
-            isAdded: true
-        }));
+        const requestPayload = {
+            method: 'post',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+              },
+              body: `token=${localStorage.getItem('86cd79943901')}&title=${newNotice.title}&details=${newNotice.details}&date=${newNotice.date}`
+        }
+        fetch(
+            '/api/notice',
+            requestPayload
+        ).then(res=>res.json())
+         .then((data)=> {
+             if(data.success) {
+                const noticeWithId = {
+                    ...newNotice,
+                    _id: data.noticeId
+                }
+                this.setState((prevState)=>({
+                    notices: [...prevState.notices, noticeWithId],
+                }));
+             } else if (data.notAdmin) {
+                 localStorage.removeItem('86cd79943901')
+             }
+             this.setState({
+                isAdded: true
+             })
+         })
         setTimeout(()=> {
             this.setState({
                 isAdded: false
@@ -85,11 +93,11 @@ export default class MainApp extends Component {
     }
 
     renderNotice({ match }) {
-        const noticeId = Number(match.params.id);
+        const noticeId = match.params.id;
         let notice = null;
         if( this.state.notices ) {
             notice = this.state.notices.filter((notice)=> {
-                if( noticeId === notice.id ) return true;
+                if( noticeId === notice._id ) return true;
                 return false;
             })[0]
         }
@@ -123,7 +131,6 @@ export default class MainApp extends Component {
     }
   
     render() {
-        console.log('this is the state', this.state.notices)
         return (
             <div>
                 <Navbar title = "Notice Board"/>

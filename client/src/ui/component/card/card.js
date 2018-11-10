@@ -4,7 +4,7 @@ import './card.css';
 
 export default function (props) {
     return (
-        <Link to={`/notice/${ props.id }` }>
+        <Link to={`/notice/${ props._id }` }>
             <div
                 id={props.id}
                 className="card"

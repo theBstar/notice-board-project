@@ -19,7 +19,6 @@ export default class AddNoticePage extends Component {
             btnText: 'Add',
             redirectTo: '/admin',
         }
-        console.log("....this is the isAdded", this.props.isAdded)
         return (
             (this.state.isLoggedIn) ? (
                 <div className="main-container">

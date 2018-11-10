@@ -2,7 +2,6 @@ import React from 'react';
 import './notice.css'
 
 export default function (props) {
-    console.log('this is the notice props ', props.notice)
     return (
         (props.notice) ? (
             <div className="main-container">

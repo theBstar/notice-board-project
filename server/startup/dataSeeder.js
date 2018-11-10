@@ -1,7 +1,6 @@
 const collection = require('../dataModel/collections');
 
 module.exports = (function () {
-    console.log('Data seeder running....')
     collection.Notice.find({}, function(err, result) {
         if (result.length === 0) {
             collection.Notice.insertMany([
@@ -25,7 +24,9 @@ module.exports = (function () {
         if (!err && result.length === 0) {
             collection.Admin.insertMany([{
                 email: process.env.ADMIN_EMAIL,
-                password: process.env.ADMIN_PASSWORD
+                password: process.env.ADMIN_PASSWORD,
+                tokenName: process.env.ADMIN_TOKEN,
+                token: String(Math.floor(Math.random()*9999999))
             }]);
         }
     })
