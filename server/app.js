@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 const collection = require('./dataModel/collections');
+const sendMailToSubscriber = require('./nodeMailer');
 require('./startup/dataSeeder')
+
 
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true }, function (err) {
@@ -37,8 +39,9 @@ app.route('/api/notice')
                             if (!err && result) {
                                 res.json({
                                     success: true,
-                                    noticeId: result
+                                    noticeId: result._id
                                 })
+                                sendMailToSubscriber()
                             }
                         })
                     }else {
@@ -81,7 +84,7 @@ app.post('/api/subscribe', function (req, res) {
 })
 
 app.post('/api/admin/login', function (req, res) {
-    console.log('api/admin/login post request received, admin login', JSON.stringify(req.body));
+    console.log('api/admin/login post request received, admin login');
     if (req.body.password && req.body.email) {
         collection.Admin.findOne({
             email: req.body.email,

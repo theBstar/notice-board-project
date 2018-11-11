@@ -66,13 +66,13 @@ export default class MainApp extends Component {
              }
              this.setState({
                 isAdded: true
-             })
+             });
+             setTimeout(()=> {
+                this.setState({
+                    isAdded: false
+                })
+            }, 0)
          })
-        setTimeout(()=> {
-            this.setState({
-                isAdded: false
-            })
-        }, 200)
     }
 
     renderHome() {
@@ -119,9 +119,7 @@ export default class MainApp extends Component {
     }
 
     renderAddNotice() {
-        // this.setState({
-        //     isAdded: false
-        // })
+        console.log("render add notice called ", this.state.isAdded)
         return (
             <AddNoticePage
                 onFormSubmit={ this.addNotice }
