@@ -105,7 +105,7 @@ app.post('/api/admin/login', function (req, res) {
 })
 
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve('/client/build/index.html'));
+    res.sendFile(path.join('../', 'client/build/index.html'));
 });
 
 module.exports = app;
