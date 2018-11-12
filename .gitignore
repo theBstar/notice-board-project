@@ -2,3 +2,5 @@ node_modules
 *.log
 logs
 .env
+npm-debug.log
+.DS_Store
