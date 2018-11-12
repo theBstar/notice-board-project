@@ -72,3 +72,13 @@
 #modal-btn:active {
    background: #2e5f67;
 }
+
+@media only screen and (max-width: 600px) {
+    .modal-content {
+        width: 98%;
+        padding: 12% 3%;
+    }
+    .modal-input {
+        width: 90%;
+    }
+} 
